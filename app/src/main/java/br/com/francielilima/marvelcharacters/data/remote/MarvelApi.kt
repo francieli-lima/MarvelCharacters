@@ -2,14 +2,17 @@ package br.com.francielilima.marvelcharacters.data.remote
 
 import br.com.francielilima.marvelcharacters.data.remote.dto.CharacterDto
 import retrofit2.http.GET
-import retrofit2.http.Path
-import java.security.MessageDigest
+import retrofit2.http.Query
 
 interface MarvelApi {
 
     @GET("v1/public/characters")
-    suspend fun getCharacters(): Query?
+    suspend fun getCharacters(
+        @Query("apikey") apiKey: String,
+        @Query("ts") timestamp: Long,
+        @Query("hash") hash: String,
+    ): Result
 }
 
-data class Query(val data: Data)
+data class Result(val data: Data)
 data class Data(val results: List<CharacterDto>)
