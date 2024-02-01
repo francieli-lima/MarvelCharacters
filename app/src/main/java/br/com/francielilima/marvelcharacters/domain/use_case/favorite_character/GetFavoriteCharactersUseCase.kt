@@ -3,7 +3,6 @@ package br.com.francielilima.marvelcharacters.domain.use_case.favorite_character
 import br.com.francielilima.marvelcharacters.domain.model.Character
 import br.com.francielilima.marvelcharacters.domain.repository.FavoriteCharacterRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class GetFavoriteCharactersUseCase(
     private val repository: FavoriteCharacterRepository

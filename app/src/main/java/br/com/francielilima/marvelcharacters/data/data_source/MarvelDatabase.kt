@@ -8,7 +8,7 @@ import br.com.francielilima.marvelcharacters.domain.model.Character
     entities = [Character::class],
     version = 1
 )
-abstract class MarvelDatabase: RoomDatabase() {
+abstract class MarvelDatabase : RoomDatabase() {
 
     abstract val characterDao: CharacterDao
 

@@ -10,6 +10,8 @@ import br.com.francielilima.marvelcharacters.presentation.character_detail.Chara
 import br.com.francielilima.marvelcharacters.presentation.character_detail.CharacterDetailViewModel
 import br.com.francielilima.marvelcharacters.presentation.character_list.CharacterListScreen
 import br.com.francielilima.marvelcharacters.presentation.character_list.CharacterListViewModel
+import br.com.francielilima.marvelcharacters.presentation.favorite_list.FavoriteListScreen
+import br.com.francielilima.marvelcharacters.presentation.favorite_list.FavoriteListViewModel
 import br.com.francielilima.marvelcharacters.presentation.ui.theme.MarvelCharactersTheme
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,6 +48,16 @@ class MainActivity : ComponentActivity() {
 
                         CharacterDetailScreen(
                             viewModel = viewModel
+                        )
+                    }
+
+                    composable(
+                        route = "favorite_characters_list"
+                    ) {
+                        val viewModel by viewModel<FavoriteListViewModel>()
+                        FavoriteListScreen(
+                            viewModel = viewModel,
+                            navController = navController
                         )
                     }
                 }

@@ -26,12 +26,13 @@ class CharacterListViewModel(
     }
 
     fun onEvent(event: CharacterEvent) {
-        when(event) {
-            is CharacterEvent.FavoriteCharacter ->  {
+        when (event) {
+            is CharacterEvent.FavoriteCharacter -> {
                 viewModelScope.launch {
                     addFavoriteCharacterUseCase.invoke(event.character)
                 }
             }
+
             is CharacterEvent.UnfavoriteCharacter -> {
                 viewModelScope.launch {
                     deleteFavoriteCharacterUseCase.invoke(event.character)

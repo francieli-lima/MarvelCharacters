@@ -1,7 +1,7 @@
 package br.com.francielilima.marvelcharacters.domain.repository
 
-import kotlinx.coroutines.flow.Flow
 import br.com.francielilima.marvelcharacters.domain.model.Character
+import kotlinx.coroutines.flow.Flow
 
 interface FavoriteCharacterRepository {
 

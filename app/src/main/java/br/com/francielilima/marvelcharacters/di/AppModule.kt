@@ -1,11 +1,8 @@
 package br.com.francielilima.marvelcharacters.di
 
-import android.content.Context
 import android.os.Bundle
 import androidx.room.Room
-import br.com.francielilima.marvelcharacters.Application
 import br.com.francielilima.marvelcharacters.common.Constants
-import br.com.francielilima.marvelcharacters.data.data_source.CharacterDao
 import br.com.francielilima.marvelcharacters.data.data_source.MarvelDatabase
 import br.com.francielilima.marvelcharacters.data.remote.MarvelApi
 import br.com.francielilima.marvelcharacters.data.repository.FavoriteCharacterRepositoryImpl
@@ -20,6 +17,7 @@ import br.com.francielilima.marvelcharacters.domain.use_case.get_character.GetCh
 import br.com.francielilima.marvelcharacters.domain.use_case.get_characters.GetCharactersUseCase
 import br.com.francielilima.marvelcharacters.presentation.character_detail.CharacterDetailViewModel
 import br.com.francielilima.marvelcharacters.presentation.character_list.CharacterListViewModel
+import br.com.francielilima.marvelcharacters.presentation.favorite_list.FavoriteListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -90,6 +88,9 @@ val viewModelModule = module {
     }
     viewModel { (bundle: Bundle) ->
         CharacterDetailViewModel(get(), bundle)
+    }
+    viewModel {
+        FavoriteListViewModel(get(), get())
     }
 }
 

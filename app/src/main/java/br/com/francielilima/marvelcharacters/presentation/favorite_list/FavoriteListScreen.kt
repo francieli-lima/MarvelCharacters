@@ -1,4 +1,4 @@
-package br.com.francielilima.marvelcharacters.presentation.character_list
+package br.com.francielilima.marvelcharacters.presentation.favorite_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,19 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,9 +23,9 @@ import androidx.navigation.NavController
 import br.com.francielilima.marvelcharacters.presentation.character_list.components.CharacterListItem
 
 @Composable
-fun CharacterListScreen(
+fun FavoriteListScreen(
     navController: NavController,
-    viewModel: CharacterListViewModel
+    viewModel: FavoriteListViewModel
 ) {
     val state = viewModel.state.value
     Box(
@@ -58,42 +49,14 @@ fun CharacterListScreen(
                                 navController.navigate("character_detail" + "/${character.id}")
                             },
                             onFavorite = {
-                                if (character.isFavorite) {
-                                    viewModel.onEvent(CharacterEvent.UnfavoriteCharacter(character))
-                                } else {
-                                    viewModel.onEvent(CharacterEvent.FavoriteCharacter(character))
-                                }
+                                viewModel.onEvent(
+                                    FavoriteCharacterEvent.UnfavoriteCharacter(
+                                        character
+                                    )
+                                )
                             }
                         )
                     }
-                }
-            }
-            Row(
-                modifier = Modifier
-            ) {
-                var text by remember { mutableStateOf("") }
-
-                TextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    label = { Text("Search") },
-                    modifier = Modifier
-                        .weight(4F)
-                )
-
-                IconButton(
-                    modifier = Modifier
-                        .weight(1F)
-                        .align(Alignment.CenterVertically),
-                    onClick = {
-                        navController.navigate("favorite_characters_list")
-                    },
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        tint = Color.White,
-                        contentDescription = "Favorites"
-                    )
                 }
             }
         }
