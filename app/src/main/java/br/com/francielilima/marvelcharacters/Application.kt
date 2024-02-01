@@ -2,6 +2,7 @@ package br.com.francielilima.marvelcharacters
 
 import android.app.Application
 import br.com.francielilima.marvelcharacters.di.appModule
+import br.com.francielilima.marvelcharacters.di.databaseModule
 import br.com.francielilima.marvelcharacters.di.networkModule
 import br.com.francielilima.marvelcharacters.di.repositoryModule
 import br.com.francielilima.marvelcharacters.di.useCasesModule
@@ -16,7 +17,7 @@ class Application : Application() {
 
         startKoin {
             androidContext(this@Application)
-            modules(appModule, viewModelModule, repositoryModule, networkModule, useCasesModule)
+            modules(appModule, viewModelModule, repositoryModule, networkModule, useCasesModule, databaseModule)
         }
     }
 }

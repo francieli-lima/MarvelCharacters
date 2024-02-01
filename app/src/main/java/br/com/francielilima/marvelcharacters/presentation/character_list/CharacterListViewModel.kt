@@ -5,12 +5,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.francielilima.marvelcharacters.common.Resource
+import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.AddFavoriteCharacterUseCase
+import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.DeleteFavoriteCharacterUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.get_characters.GetCharactersUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class CharacterListViewModel(
-    private val getCharactersUseCase: GetCharactersUseCase
+    private val getCharactersUseCase: GetCharactersUseCase,
+    private val addFavoriteCharacterUseCase: AddFavoriteCharacterUseCase,
+    private val deleteFavoriteCharacterUseCase: DeleteFavoriteCharacterUseCase
 ) : ViewModel() {
 
     private val _state = mutableStateOf(CharacterListState())
@@ -18,6 +23,21 @@ class CharacterListViewModel(
 
     init {
         getCharacters()
+    }
+
+    fun onEvent(event: CharacterEvent) {
+        when(event) {
+            is CharacterEvent.FavoriteCharacter ->  {
+                viewModelScope.launch {
+                    addFavoriteCharacterUseCase.invoke(event.character)
+                }
+            }
+            is CharacterEvent.UnfavoriteCharacter -> {
+                viewModelScope.launch {
+                    deleteFavoriteCharacterUseCase.invoke(event.character)
+                }
+            }
+        }
     }
 
     private fun getCharacters() {

@@ -7,9 +7,6 @@ data class CharacterDto(
     val name: String?,
     val description: String?,
     val thumbnail: ImageDto?,
-    val comics: ComicListDto?,
-    val events: EventListDto?,
-    val series: SeriesListDto?
 )
 
 fun CharacterDto.toCharacter(): Character {
@@ -18,8 +15,6 @@ fun CharacterDto.toCharacter(): Character {
         name = name ?: "",
         description = description ?: "",
         thumbnail = "${thumbnail?.path}.${thumbnail?.extension}",
-        comics = comics?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),
-        events = events?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),
-        series = series?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),
+        isFavorite = false
     )
 }

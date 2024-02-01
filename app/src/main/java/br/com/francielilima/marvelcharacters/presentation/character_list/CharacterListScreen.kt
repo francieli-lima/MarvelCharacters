@@ -50,6 +50,13 @@ fun CharacterListScreen(
                         character = character,
                         onItemClick = {
                             navController.navigate("character_detail" + "/${character.id}")
+                        },
+                        onFavorite = {
+                            if(character.isFavorite) {
+                                viewModel.onEvent(CharacterEvent.UnfavoriteCharacter(character))
+                            } else {
+                                viewModel.onEvent(CharacterEvent.FavoriteCharacter(character))
+                            }
                         }
                     )
                 }

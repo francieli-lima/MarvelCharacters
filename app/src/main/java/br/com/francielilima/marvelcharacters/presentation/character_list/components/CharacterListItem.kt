@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -16,9 +17,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,7 +34,8 @@ import coil.compose.rememberAsyncImagePainter
 @Composable
 fun CharacterListItem(
     character: Character,
-    onItemClick: (Character) -> Unit
+    onItemClick: (Character) -> Unit,
+    onFavorite: (Character) -> Unit,
 ) {
     Column {
         Row(
@@ -73,15 +79,24 @@ fun CharacterListItem(
                 )
             }
 
+            val thumbIconLiked = remember {
+                mutableStateOf(character.isFavorite)
+            }
+
             IconButton(
                 modifier = Modifier
                     .weight(1F),
                 onClick = {
-
+                    onFavorite.invoke(character)
+                    thumbIconLiked.value = !thumbIconLiked.value
                 },
             ) {
                 Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
+                    imageVector = if (thumbIconLiked.value) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
                     tint = Color.White,
                     contentDescription = "Favorite"
                 )
