@@ -1,18 +1,20 @@
 package br.com.francielilima.marvelcharacters.di
 
-import android.util.Config.DEBUG
+import android.os.Bundle
 import br.com.francielilima.marvelcharacters.common.Constants
-import br.com.francielilima.marvelcharacters.data.repository.MarvelRepositoryImpl
 import br.com.francielilima.marvelcharacters.data.remote.MarvelApi
+import br.com.francielilima.marvelcharacters.data.repository.MarvelRepositoryImpl
 import br.com.francielilima.marvelcharacters.domain.repository.MarvelRepository
+import br.com.francielilima.marvelcharacters.domain.use_case.get_character.GetCharacterByIdUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.get_characters.GetCharactersUseCase
+import br.com.francielilima.marvelcharacters.presentation.character_detail.CharacterDetailViewModel
 import br.com.francielilima.marvelcharacters.presentation.character_list.CharacterListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.converter.gson.GsonConverterFactory
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
 
@@ -38,10 +40,10 @@ val networkModule = module {
     fun provideHttpClient(): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
 
-            val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-            okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
+        val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
 
         okHttpClientBuilder.build()
         return okHttpClientBuilder.build()
@@ -66,8 +68,12 @@ val viewModelModule = module {
     viewModel {
         CharacterListViewModel(get())
     }
+    viewModel { (bundle: Bundle) ->
+        CharacterDetailViewModel(get(), bundle)
+    }
 }
 
 val useCasesModule = module {
-    single { GetCharactersUseCase(get())}
+    single { GetCharactersUseCase(get()) }
+    single { GetCharacterByIdUseCase(get()) }
 }

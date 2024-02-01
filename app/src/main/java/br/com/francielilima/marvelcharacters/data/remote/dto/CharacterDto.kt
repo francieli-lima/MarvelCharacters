@@ -17,7 +17,7 @@ fun CharacterDto.toCharacter(): Character {
         id = id ?: -1,
         name = name ?: "",
         description = description ?: "",
-        thumbnail = thumbnail?.path ?: "",
+        thumbnail = "${thumbnail?.path}.${thumbnail?.extension}",
         comics = comics?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),
         events = events?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),
         series = series?.items?.map { name ?: "" }?.toList() ?: listOf<String>(),

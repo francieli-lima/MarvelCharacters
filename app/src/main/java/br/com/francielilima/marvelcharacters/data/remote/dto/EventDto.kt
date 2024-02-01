@@ -1,5 +1,5 @@
 package br.com.francielilima.marvelcharacters.data.remote.dto
 
-data class EventDto (
+data class EventDto(
     val name: String?
 )
