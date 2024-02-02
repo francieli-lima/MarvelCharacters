@@ -3,7 +3,7 @@ Android app to load Marvel Api's characters list
 
 An android app that is fed by https://developer.marvel.com/docs., built with Kotlin using MVVM with clean architecture.
 
-<img src="screenshots/homepng" width="200"> | <img src="screenshots/details.png" width="200"> | <img src="screenshots/favoritos.png" width="200">
+<img src="screenshots/home.png" width="200"> | <img src="screenshots/detalhes.png" width="200"> | <img src="screenshots/favoritos.png" width="200">
 
 Dependencies used
 --------
