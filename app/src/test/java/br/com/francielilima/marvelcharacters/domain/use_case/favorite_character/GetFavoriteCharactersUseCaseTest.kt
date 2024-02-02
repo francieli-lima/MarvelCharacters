@@ -1,8 +1,6 @@
 package br.com.francielilima.marvelcharacters.domain.use_case.favorite_character
 
-import br.com.francielilima.marvelcharacters.common.Resource
 import br.com.francielilima.marvelcharacters.domain.model.Character
-import br.com.francielilima.marvelcharacters.domain.use_case.get_characters.GetCharactersUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase

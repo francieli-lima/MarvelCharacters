@@ -6,4 +6,5 @@ sealed class CharacterEvent {
     data class UnfavoriteCharacter(val character: Character) : CharacterEvent()
     data class FavoriteCharacter(val character: Character) : CharacterEvent()
     data class Search(val search: String) : CharacterEvent()
+    object Reload : CharacterEvent()
 }

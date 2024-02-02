@@ -3,16 +3,9 @@ package br.com.francielilima.marvelcharacters.domain.use_case.get_characters
 import br.com.francielilima.marvelcharacters.common.Resource
 import br.com.francielilima.marvelcharacters.data.remote.dto.toCharacter
 import br.com.francielilima.marvelcharacters.domain.model.Character
-import br.com.francielilima.marvelcharacters.domain.repository.FavoriteCharacterRepository
 import br.com.francielilima.marvelcharacters.domain.repository.MarvelRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.flow.toList
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,6 +1,5 @@
 package br.com.francielilima.marvelcharacters.di
 
-import android.os.Bundle
 import androidx.room.Room
 import br.com.francielilima.marvelcharacters.common.Constants
 import br.com.francielilima.marvelcharacters.data.data_source.MarvelDatabase
@@ -85,8 +84,8 @@ val viewModelModule = module {
     viewModel {
         CharacterListViewModel(get(), get(), get(), get())
     }
-    viewModel { (bundle: Bundle) ->
-        CharacterDetailViewModel(get(), bundle)
+    viewModel { (id: Int) ->
+        CharacterDetailViewModel(get(), id)
     }
     viewModel {
         FavoriteListViewModel(get(), get())

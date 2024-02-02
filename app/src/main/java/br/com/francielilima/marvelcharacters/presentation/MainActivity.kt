@@ -3,9 +3,11 @@ package br.com.francielilima.marvelcharacters.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import br.com.francielilima.marvelcharacters.presentation.character_detail.CharacterDetailScreen
 import br.com.francielilima.marvelcharacters.presentation.character_detail.CharacterDetailViewModel
 import br.com.francielilima.marvelcharacters.presentation.character_list.CharacterListScreen
@@ -38,11 +40,12 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(
-                        route = Screen.CharacterDetailsScreen.route + "/{id}"
+                        route = Screen.CharacterDetailsScreen.route + "/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.IntType })
                     ) {
                         val viewModel = getViewModel<CharacterDetailViewModel>(
                             parameters = {
-                                parametersOf(navController.currentBackStackEntry?.arguments)
+                                parametersOf(it.arguments?.getInt("id"))
                             }
                         )
 

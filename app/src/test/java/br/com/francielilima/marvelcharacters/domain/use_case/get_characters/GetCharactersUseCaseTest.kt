@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class GetCharactersUseCaseTest  {
+class GetCharactersUseCaseTest {
 
     private var getCharactersUseCase: GetCharactersUseCase = mockk()
 

@@ -26,10 +26,6 @@ class CharacterListViewModel(
 
     private var completeCharactersList = listOf<Character>()
 
-    init {
-        getCharacters()
-    }
-
     fun onEvent(event: CharacterEvent) {
         when (event) {
             is CharacterEvent.FavoriteCharacter -> {
@@ -45,8 +41,13 @@ class CharacterListViewModel(
             }
 
             is CharacterEvent.Search -> {
-                val list = completeCharactersList.filter { it.name.lowercase().startsWith(event.search)}
+                val list =
+                    completeCharactersList.filter { it.name.lowercase().startsWith(event.search) }
                 _state.value = CharacterListState(characters = list)
+            }
+
+            CharacterEvent.Reload -> {
+                getCharacters()
             }
         }
     }
@@ -63,7 +64,8 @@ class CharacterListViewModel(
                 is Resource.Success -> {
                     val characterList = result.data ?: emptyList()
                     characterList.map { character ->
-                        character.isFavorite = favoriteList.any { favoriteCharacter -> favoriteCharacter.id == character.id}
+                        character.isFavorite =
+                            favoriteList.any { favoriteCharacter -> favoriteCharacter.id == character.id }
                         character
                     }
 

@@ -1,6 +1,5 @@
 package br.com.francielilima.marvelcharacters.presentation.character_detail
 
-import android.os.Bundle
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -12,14 +11,18 @@ import kotlinx.coroutines.flow.onEach
 
 class CharacterDetailViewModel(
     private val getCharacterByIdUseCase: GetCharacterByIdUseCase,
-    arguments: Bundle,
+    private var id: Int,
 ) : ViewModel() {
 
     private val _state = mutableStateOf(CharacterDetailState())
     val state: State<CharacterDetailState> = _state
 
-    init {
-        getCharacter(arguments.getString("id")?.toInt() ?: 0)
+    fun onEvent(event: CharacterDetailEvent) {
+        when (event) {
+            CharacterDetailEvent.Reload -> {
+                getCharacter(id)
+            }
+        }
     }
 
     private fun getCharacter(id: Int) {

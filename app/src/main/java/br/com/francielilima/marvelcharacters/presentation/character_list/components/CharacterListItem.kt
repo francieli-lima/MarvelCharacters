@@ -1,5 +1,6 @@
 package br.com.francielilima.marvelcharacters.presentation.character_list.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import br.com.francielilima.marvelcharacters.domain.model.Character
 import coil.compose.rememberAsyncImagePainter
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun CharacterListItem(
     character: Character,
@@ -77,20 +78,18 @@ fun CharacterListItem(
                 )
             }
 
-            val thumbIconLiked = remember {
-                mutableStateOf(character.isFavorite)
-            }
+            val isFavorite = mutableStateOf(character.isFavorite)
 
             IconButton(
                 modifier = Modifier
                     .weight(1F),
                 onClick = {
                     onFavorite.invoke(character)
-                    thumbIconLiked.value = !thumbIconLiked.value
+                    isFavorite.value = !isFavorite.value
                 },
             ) {
                 Icon(
-                    imageVector = if (thumbIconLiked.value) {
+                    imageVector = if (isFavorite.value) {
                         Icons.Default.Favorite
                     } else {
                         Icons.Default.FavoriteBorder
