@@ -32,6 +32,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.francielilima.marvelcharacters.presentation.character_list.components.CharacterListItem
+import kotlinx.coroutines.launch
 
 @Composable
 fun CharacterListScreen(
@@ -57,6 +59,7 @@ fun CharacterListScreen(
     viewModel: CharacterListViewModel
 ) {
     val state = viewModel.state.value
+    val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -68,25 +71,48 @@ fun CharacterListScreen(
             Row(
                 modifier = Modifier.weight(15F)
             ) {
-                LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize(),
-                    columns = GridCells.Fixed(1)
-                ) {
-                    items(state.characters) { character ->
-                        CharacterListItem(
-                            character = character,
-                            onItemClick = {
-                                navController.navigate("character_detail" + "/${character.id}")
-                            },
-                            onFavorite = {
-                                if (character.isFavorite) {
-                                    viewModel.onEvent(CharacterEvent.UnfavoriteCharacter(character))
-                                } else {
-                                    viewModel.onEvent(CharacterEvent.FavoriteCharacter(character))
+                if (state.characters.isNotEmpty()) {
+                    LazyVerticalGrid(
+                        modifier = Modifier.fillMaxSize(),
+                        columns = GridCells.Fixed(1)
+                    ) {
+                        items(state.characters) { character ->
+                            CharacterListItem(
+                                character = character,
+                                onItemClick = {
+                                    scope.launch {
+                                        navController.navigate("character_detail" + "/${character.id}")
+                                    }
+                                },
+                                onFavorite = {
+                                    scope.launch {
+                                        if (character.isFavorite) {
+                                            viewModel.onEvent(
+                                                CharacterEvent.UnfavoriteCharacter(
+                                                    character
+                                                )
+                                            )
+                                        } else {
+                                            viewModel.onEvent(
+                                                CharacterEvent.FavoriteCharacter(
+                                                    character
+                                                )
+                                            )
+                                        }
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
+                } else {
+                    Text(
+                        text = "Sem resultados.",
+                        color = MaterialTheme.colorScheme.secondary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                    )
                 }
             }
             Row(

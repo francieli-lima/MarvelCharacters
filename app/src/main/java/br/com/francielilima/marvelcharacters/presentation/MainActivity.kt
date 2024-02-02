@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
                         )
 
                         CharacterDetailScreen(
+                            navController = navController,
                             viewModel = viewModel
                         )
                     }

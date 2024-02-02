@@ -11,7 +11,6 @@ import br.com.francielilima.marvelcharacters.domain.repository.FavoriteCharacter
 import br.com.francielilima.marvelcharacters.domain.repository.MarvelRepository
 import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.AddFavoriteCharacterUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.DeleteFavoriteCharacterUseCase
-import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.GetFavoriteCharacterUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.favorite_character.GetFavoriteCharactersUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.get_character.GetCharacterByIdUseCase
 import br.com.francielilima.marvelcharacters.domain.use_case.get_characters.GetCharactersUseCase
@@ -99,7 +98,6 @@ val useCasesModule = module {
     single { GetCharacterByIdUseCase(get()) }
     single { AddFavoriteCharacterUseCase(get()) }
     single { DeleteFavoriteCharacterUseCase(get()) }
-    single { GetFavoriteCharacterUseCase(get()) }
     single { GetFavoriteCharactersUseCase(get()) }
 }
 

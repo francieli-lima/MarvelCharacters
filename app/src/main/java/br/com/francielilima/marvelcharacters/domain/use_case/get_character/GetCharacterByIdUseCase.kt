@@ -18,9 +18,9 @@ class GetCharacterByIdUseCase(
             val character = repository.getCharacterById(id).toCharacter()
             emit(Resource.Success(character))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(Resource.Error(e.localizedMessage ?: "Ocorreu um erro inesperado."))
         } catch (e: IOException) {
-            emit(Resource.Error("Couldn't reach server. Check your internet connection."))
+            emit(Resource.Error("Falha na conexão com a internet."))
         }
     }
 }

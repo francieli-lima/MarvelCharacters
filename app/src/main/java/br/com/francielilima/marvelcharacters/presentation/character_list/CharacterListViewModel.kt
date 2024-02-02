@@ -2,7 +2,6 @@ package br.com.francielilima.marvelcharacters.presentation.character_list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.francielilima.marvelcharacters.common.Resource
@@ -25,7 +24,7 @@ class CharacterListViewModel(
     private val _state = mutableStateOf(CharacterListState())
     val state: State<CharacterListState> = _state
 
-    var completeCharactersList = listOf<Character>()
+    private var completeCharactersList = listOf<Character>()
 
     init {
         getCharacters()
