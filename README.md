@@ -1,5 +1,4 @@
 # MarvelCharacters
-Android app to load Marvel Api's characters list
 
 An android app that is fed by https://developer.marvel.com/docs., built with Kotlin using MVVM with clean architecture.
 
@@ -16,6 +15,6 @@ Dependencies used
 
 How to use it
 --------
-Android Studio Hedgehog or newer
-Update file br.com.francielilima.marvelcharacters.common.Constants with your API Keys
+- Android Studio Hedgehog or newer
+- Update file br.com.francielilima.marvelcharacters.common.Constants with your API Keys
 
