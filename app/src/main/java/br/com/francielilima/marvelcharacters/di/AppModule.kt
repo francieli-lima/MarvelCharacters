@@ -84,7 +84,7 @@ val networkModule = module {
 val viewModelModule = module {
 
     viewModel {
-        CharacterListViewModel(get(), get(), get())
+        CharacterListViewModel(get(), get(), get(), get())
     }
     viewModel { (bundle: Bundle) ->
         CharacterDetailViewModel(get(), bundle)

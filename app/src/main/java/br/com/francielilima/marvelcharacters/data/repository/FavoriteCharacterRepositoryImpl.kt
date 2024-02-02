@@ -18,6 +18,7 @@ class FavoriteCharacterRepositoryImpl(
     }
 
     override suspend fun insert(character: Character) {
+        character.isFavorite = true
         dao.insert(character)
     }
 
