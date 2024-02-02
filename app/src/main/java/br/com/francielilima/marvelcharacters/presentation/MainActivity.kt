@@ -25,10 +25,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "characters_list"
+                    startDestination = Screen.CharacterListScreen.route
                 ) {
                     composable(
-                        route = "characters_list"
+                        route = Screen.CharacterListScreen.route
                     ) {
                         val viewModel by viewModel<CharacterListViewModel>()
                         CharacterListScreen(
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(
-                        route = "character_detail" + "/{id}"
+                        route = Screen.CharacterDetailsScreen.route + "/{id}"
                     ) {
                         val viewModel = getViewModel<CharacterDetailViewModel>(
                             parameters = {
@@ -48,12 +48,12 @@ class MainActivity : ComponentActivity() {
 
                         CharacterDetailScreen(
                             navController = navController,
-                            viewModel = viewModel
+                            viewModel = viewModel,
                         )
                     }
 
                     composable(
-                        route = "favorite_characters_list"
+                        route = Screen.FavoriteCharacterScreen.route
                     ) {
                         val viewModel by viewModel<FavoriteListViewModel>()
                         FavoriteListScreen(

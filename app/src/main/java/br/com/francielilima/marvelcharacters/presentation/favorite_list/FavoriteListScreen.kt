@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.francielilima.marvelcharacters.presentation.Screen
 import br.com.francielilima.marvelcharacters.presentation.character_list.components.CharacterListItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +42,10 @@ fun FavoriteListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {},
+                title = { Text(
+                    text = "Favoritados",
+                    color = Color.White,
+                )},
                 navigationIcon = {
                     if (navController.previousBackStackEntry != null) {
                         run {
@@ -79,7 +83,7 @@ fun FavoriteListScreen(
                                     CharacterListItem(
                                         character = character,
                                         onItemClick = {
-                                            navController.navigate("character_detail" + "/${character.id}")
+                                            navController.navigate(Screen.CharacterDetailsScreen.route + "/${character.id}")
                                         },
                                         onFavorite = {
                                             viewModel.onEvent(
