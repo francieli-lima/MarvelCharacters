@@ -40,14 +40,10 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(
-                        route = Screen.CharacterDetailsScreen.route + "/{id}",
+                        route = Screen.CharacterDetailsScreen.route + "/{id}" ,
                         arguments = listOf(navArgument("id") { type = NavType.IntType })
                     ) {
-                        val viewModel = getViewModel<CharacterDetailViewModel>(
-                            parameters = {
-                                parametersOf(it.arguments?.getInt("id"))
-                            }
-                        )
+                        val viewModel = getViewModel<CharacterDetailViewModel>()
 
                         CharacterDetailScreen(
                             navController = navController,

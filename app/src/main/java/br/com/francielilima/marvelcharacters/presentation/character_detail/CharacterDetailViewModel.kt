@@ -11,19 +11,19 @@ import kotlinx.coroutines.flow.onEach
 
 class CharacterDetailViewModel(
     private val getCharacterByIdUseCase: GetCharacterByIdUseCase,
-    private var id: Int,
 ) : ViewModel() {
 
     private val _state = mutableStateOf(CharacterDetailState())
     val state: State<CharacterDetailState> = _state
 
     fun onEvent(event: CharacterDetailEvent) {
-        when (event) {
-            CharacterDetailEvent.Reload -> {
-                getCharacter(id)
+        when(event){
+            is CharacterDetailEvent.Reload -> {
+                getCharacter(event.id)
             }
         }
     }
+
 
     private fun getCharacter(id: Int) {
         getCharacterByIdUseCase(id).onEach { result ->

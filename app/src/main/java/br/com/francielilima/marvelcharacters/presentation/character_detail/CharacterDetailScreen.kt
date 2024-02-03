@@ -1,6 +1,7 @@
 package br.com.francielilima.marvelcharacters.presentation.character_detail
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,7 +46,8 @@ fun CharacterDetailScreen(
     OnLifecycleEvent { _, event ->
         when (event) {
             Lifecycle.Event.ON_RESUME -> {
-                viewModel.onEvent(CharacterDetailEvent.Reload)
+                val id = navController.currentBackStackEntry?.arguments?.getInt("id") ?: 0
+                viewModel.onEvent(CharacterDetailEvent.Reload(id))
             }
 
             else -> {}

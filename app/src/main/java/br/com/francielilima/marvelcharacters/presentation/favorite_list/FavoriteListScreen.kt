@@ -42,12 +42,10 @@ fun FavoriteListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = "Favoritados",
-                        color = Color.White,
-                    )
-                },
+                title = { Text(
+                    text = "Favoritados",
+                    color = Color.White,
+                )},
                 navigationIcon = {
                     if (navController.previousBackStackEntry != null) {
                         run {

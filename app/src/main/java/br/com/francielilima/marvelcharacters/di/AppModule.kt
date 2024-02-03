@@ -84,8 +84,8 @@ val viewModelModule = module {
     viewModel {
         CharacterListViewModel(get(), get(), get(), get())
     }
-    viewModel { (id: Int) ->
-        CharacterDetailViewModel(get(), id)
+    viewModel {
+        CharacterDetailViewModel(get())
     }
     viewModel {
         FavoriteListViewModel(get(), get())
