@@ -46,7 +46,7 @@ fun CharacterListScreen(
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> {
+            Lifecycle.Event.ON_CREATE -> {
                 viewModel.onEvent(CharacterEvent.Reload)
             }
 

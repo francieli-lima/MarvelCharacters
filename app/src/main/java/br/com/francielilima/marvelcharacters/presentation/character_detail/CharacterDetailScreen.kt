@@ -45,7 +45,7 @@ fun CharacterDetailScreen(
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> {
+            Lifecycle.Event.ON_CREATE -> {
                 val id = navController.currentBackStackEntry?.arguments?.getInt("id") ?: 0
                 viewModel.onEvent(CharacterDetailEvent.Reload(id))
             }
